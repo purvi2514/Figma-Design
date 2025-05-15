@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Offer Boxes</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      padding: 40px 10px;
+    }
+
+    .container {
+      max-width: 400px;
+      width: 100%;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .title {
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #ff4081;
+    }
+
+    .box {
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      position: relative;
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+
+    .box.active {
+      border-color: #ff4081;
+    }
+
+    .most-popular {
+      position: absolute;
+      top: -12px;
+      left: 10px;
+      background: #ff4081;
+      color: white;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .box input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    .details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .price {
+      font-weight: bold;
+    }
+
+    .discount {
+      font-size: 12px;
+      color: #f44336;
+      margin-left: 5px;
+    }
+
+    .hidden-content {
+      margin-top: 10px;
+      display: none;
+    }
+
+    .box.active .hidden-content {
+      display: block;
+    }
+
+    .dropdown-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 5px 0;
+    }
+
+    select {
+      padding: 5px;
+      width: 48%;
+    }
+
+    .total {
+      text-align: center;
+      font-size: 16px;
+      margin-top: 15px;
+    }
+
+    .add-to-cart {
+      margin-top: 20px;
+      background: #ff4081;
+      color: white;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">YAY! It's BOGO</div>
+
+    <div class="box" onclick="selectBox(1)">
+      <label>
+        <input type="radio" name="unit" id="unit1" />
+        1 Unit <span class="discount">10% Off</span>
+      </label>
+      <div class="details">
+        <span>Standard Price</span>
+        <span class="price">$10.00 USD</span>
+      </div>
+    </div>
+
+    <div class="box" onclick="selectBox(2)">
+      <div class="most-popular">MOST POPULAR</div>
+      <label>
+        <input type="radio" name="unit" id="unit2" />
+        2 Unit <span class="discount">20% Off</span>
+      </label>
+      <div class="details">
+        <span></span>
+        <span class="price">$18.00 USD</span>
+      </div>
+      <div class="hidden-content">
+        <div class="dropdown-row">
+          <select name="size1">
+            <option>Size</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+          </select>
+          <select name="color1">
+            <option>Colour</option>
+            <option>Black</option>
+            <option>White</option>
+          </select>
+        </div>
+        <div class="dropdown-row">
+          <select name="size2">
+            <option>Size</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+          </select>
+          <select name="color2">
+            <option>Colour</option>
+            <option>Black</option>
+            <option>White</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="box" onclick="selectBox(3)">
+      <label>
+        <input type="radio" name="unit" id="unit3" />
+        3 Unit <span class="discount">30% Off</span>
+      </label>
+      <div class="details">
+        <span></span>
+        <span class="price">$24.00 USD</span>
+      </div>
+    </div>
+
+    <div class="total">Total: <span id="totalPrice">$0.00 USD</span></div>
+    <button class="add-to-cart">+ Add to Cart</button>
+  </div>
+
+  <script>
+    const boxes = document.querySelectorAll('.box');
+    const totalPrice = document.getElementById('totalPrice');
+
+    function selectBox(index) {
+      boxes.forEach((box, i) => {
+        if (i === index - 1) {
+          box.classList.add('active');
+          box.querySelector('input').checked = true;
+        } else {
+          box.classList.remove('active');
+        }
+      });
+
+      if (index === 1) totalPrice.innerText = "$10.00 USD";
+      if (index === 2) totalPrice.innerText = "$18.00 USD";
+      if (index === 3) totalPrice.innerText = "$24.00 USD";
+    }
+  </script>
+</body>
+</html>
